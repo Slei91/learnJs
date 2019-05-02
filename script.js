@@ -1,3 +1,5 @@
+"use strict";
+
 let money, time;
 
 function start() {
@@ -66,5 +68,24 @@ var appData = {
             appData.monthIncome = save / 100 / 12 * percent;
             alert("Доход в месяц с вашего депозита: " + appData.monthIncome);
         }
+    },
+    chooseIncome: function() {
+        let items = prompt("Что принесет дополнительный доход (перечислить через запятую)","");
+
+        if (isNaN(items) && items != null && items != "") {
+            appData.income = items.split(", ");
+            appData.income.push(prompt("Может что-то еще?", ""));
+            appData.income.sort();
+        } else {
+            console.log("Некорректные данные");
+        }
+
+        appData.income.forEach(function(item, index) {
+            alert("Способы доп. заработка: " + (index + 1) + " - " + item);
+        });
     }
 };
+
+for (var key in appData) {
+    console.log("Наша программа включает в себя данные: " + key + " - " + appData[key]);
+}
